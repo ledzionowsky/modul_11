@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tu tworzymy samochód i tworzymy listę</title>
+    <style>
+        table, th, tr, td {border: 1px solid black;}
+    </style>
+</head>
+
+<h2>Lista samochodów</h2>
+<table>
+    <thead>
+    <th>id</th>
+    <th>Marka</th>
+    <th>Model</th>
+    <th>Rocznik</th>
+    <th>Kolor</th>
+    <th>Moc</th>
+    <th>Czy bezwypadkowy?</th>
+    </thead>
+{% for car in cars %}
+    <tr>
+        <td><a href="/cars/{{ car[0]}}">{{ car[0]}}</a></td>
+        <td>{{ car[1] }}</td>
+        <td>{{ car[2] }}</td>
+        <td>{{ car[3] }}</td>
+        <td>{{ car[4] }}</td>
+        <td>{{ car[5] }}</td>
+        <td>{{ car[6] }}</td>
+    </tr>
+{% endfor %}
+</table>
+<div>
+    <h2> Dodaj nowe auto: </h2>
+    <form method="POST" action="/cars/">
+        {{ car_model.hidden_tag() }}
+        <table>
+            {% for field in car_model if field.widget.input_type != 'hidden' %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Dodaj">
+    </form>
+</div>
+</body>
+</html>

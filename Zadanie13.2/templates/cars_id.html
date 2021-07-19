@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły cars</title>
+</head>
+<body>
+    <h2> Zmień: </h2>
+    <form method="POST" action="/update_car/{{car_id}}">
+        <table>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Zaktualizuj">
+    </form>
+    <form method="POST" action="/delete_car/{{car_id}}">
+        <input type="submit" value="Usuń">
+    </form>
+</body>
+</html>
